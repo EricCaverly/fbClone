@@ -1,6 +1,25 @@
 #include <list>
 #include <raylib.h>
 
+/*
+
+Takeaway Questions:
+    - I am not 100% sure what the best practice is for using Getgers / Setters vs just making the member variable public. 
+        - In C# it's always better to use properties but the language support is much nicer
+    - Is having an Options namespace like this a good idea? It may be more difficult to load this from a File but as I have yet to experiement with "good" file parsing who knows
+        - Along with that, where should consts like pipe width go? options, or under pipe?
+    - Originally I tried to use inheritence with Birds and Pipes under an entity class but reaslized later on that they were too dissimilar. I know realize that was silly in the first place. Ensure that inheritance is only used when it makes sense
+    - My BirdCollide function does 2 things, checks if the bird died or if it should score. This goes against the single function per function principle, but it is efficient. Should this become multiple functions?
+    - Is the game reset logic in main.cpp acceptable? It is easier than implementing a Reset function but is that best practice?
+*/
+
+/*
+Future plans:
+    - Switch to 2D graphics via sprites instead of basic shapes
+    - Implement a main menu and more gameplay hints
+    - Sounds?
+*/
+
 namespace Options {
     const Color bgColor = {100, 200, 200};
     const int screenWidth = 600;
