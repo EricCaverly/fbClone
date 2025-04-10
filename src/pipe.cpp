@@ -1,6 +1,5 @@
 #include "flappy.hpp"
 #include <cstdlib>
-#include <raylib.h>
 
 /************************ Pipe ****************************/
 Pipe::Pipe(float xPos, float openingTop, float openingBot)
@@ -30,14 +29,23 @@ float Pipe::GetOpeningBot() const { return m_OpeningBot; }
 
 /*********************** Pipes ********************************/
 
-Pipes::Pipes(float xSpace, float xVel, float highestOpening, float lowestOpening) 
-    : m_xVel(xVel), m_xSpace(xSpace), m_highestOpening(highestOpening), m_lowestOpening(lowestOpening) {
+void Pipes::Init() {
     m_Pipes = std::list<Pipe>();
     
     // Generate enough pipes to fill the screen while keeping m_xSpace between them
     for (int i = 0; i < Options::screenWidth; i+=m_xSpace) {
         GeneratePair(i+Options::screenWidth);
     }
+}
+
+Pipes::Pipes(float xSpace, float xVel, float highestOpening, float lowestOpening) 
+    : m_xVel(xVel), m_xSpace(xSpace), m_highestOpening(highestOpening), m_lowestOpening(lowestOpening) {
+    Init();
+}
+
+Pipes::Pipes()
+ :  m_xVel(Options::basePipeSpeed), m_xSpace(230), m_highestOpening(50), m_lowestOpening(Options::screenHeight-Pipe::stdPipeOpening-50), m_Pipes() {
+    Init();
 }
 
 void Pipes::DrawAll() const {

@@ -1,11 +1,22 @@
 #include "flappy.hpp"
-#include <raylib.h>
 
 
 Bird::Bird(Vector2 startPos, Color c, float gravity) 
     : m_Alive(true), m_BetweenPipes(false), m_Score(0), m_Gravity(gravity), m_Color(c), m_Radius(18) {
     m_Pos = startPos;
     m_Vel = {0, 0};
+}
+
+Bird::Bird()
+ :  m_Alive(true), 
+    m_BetweenPipes(false), 
+    m_Score(0), 
+    m_Pos {Options::screenWidth/4.0, Options::screenHeight/2.0}, 
+    m_Vel({0, 0}), 
+    m_Gravity(0.3), 
+    m_Color({255,255,0,255}), 
+    m_Radius(18) {
+
 }
 
 void Bird::Draw() const {

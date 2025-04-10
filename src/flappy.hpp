@@ -10,7 +10,6 @@ Takeaway Questions:
         - Along with that, where should consts like pipe width go? options, or under pipe?
     - Originally I tried to use inheritence with Birds and Pipes under an entity class but reaslized later on that they were too dissimilar. I know realize that was silly in the first place. Ensure that inheritance is only used when it makes sense
     - My BirdCollide function does 2 things, checks if the bird died or if it should score. This goes against the single function per function principle, but it is efficient. Should this become multiple functions?
-    - Is the game reset logic in main.cpp acceptable? It is easier than implementing a Reset function but is that best practice?
 */
 
 /*
@@ -43,6 +42,7 @@ private:
     Color m_Color;      // Color of the bird
     float m_Radius;     // Radius of the bird
 public: 
+    Bird();
     Bird(Vector2 startPos, Color c, float gravity);
     void Draw() const;          // Display the bird
     void Move();                // Move the bird and check if it goes outside window
@@ -83,7 +83,10 @@ private:
     float m_highestOpening;     // Stores the highest (on the screen, lowest numerically) that the top pipe can end
     float m_lowestOpening;      // Stores the lowest (on the screen, highest numerically) that the top pipe can end
     std::list<Pipe> m_Pipes;    // Doubly linked list of all pipes
+
+    void Init();
 public:
+    Pipes();
     Pipes(float xSpace, float xVel, float highestOpening, float lowestOpening);
 
     void MoveAll();             // Move all the pipes within m_Pipes using Move() with m_xVel

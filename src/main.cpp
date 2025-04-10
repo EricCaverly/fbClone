@@ -1,5 +1,4 @@
 #include "flappy.hpp"
-#include <raylib.h>
 #include <string>
 
 // Title is currently unused
@@ -9,14 +8,6 @@ enum class GameState {
     GameOver
 };
 
-Bird createPlayer() {
-    return Bird({Options::screenWidth/4.0, Options::screenHeight/2.0}, {255,255,0,255}, 0.3);
-}
-
-Pipes createPipes() {
-    return Pipes(230, Options::basePipeSpeed, 50, Options::screenHeight-Pipe::stdPipeOpening-50);
-}
-
 int main() {
     // Game control variables
     GameState state = GameState::InProg;    
@@ -25,8 +16,8 @@ int main() {
     SetTargetFPS(Options::targetFps);
 
     // Game objects
-    Bird player = createPlayer();
-    Pipes pipes = createPipes();
+    Bird player = Bird();
+    Pipes pipes = Pipes();
 
     while (!WindowShouldClose()) {
         // User Input
@@ -37,8 +28,8 @@ int main() {
             pipes.BirdCollide(player);
         } else if (state == GameState::GameOver) {
             if (IsKeyPressed(KEY_R)) {
-                player = createPlayer();
-                pipes = createPipes();
+                player = Bird();
+                pipes = Pipes();
                 state = GameState::InProg;
             }
         }
